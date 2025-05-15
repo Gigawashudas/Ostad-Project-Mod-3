@@ -12,3 +12,7 @@ Extracts the url and output filename (2 lines first line url , second line filen
 Generates a QR code using that data
 
 Saves the QR code image using the specified filename
+
+
+
+* please use function and file handling techniques like with, readlines for better practise
