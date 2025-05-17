@@ -3,14 +3,10 @@ import qrcode
 
 def read_from_file(inputFileName):  
     with open(inputFileName, "r") as file:  
-        lines = map(str.strip, file.readlines())
-        return lines
+        return list(map(str.strip, file.readlines()))
 
-def generate_qrcode(url, fileName):
-    qr = qrcode.make(url)
-    qr.save("-".join(fileName.split(" ")) + ".png")
-    print(f"QR code generated and saved as {fileName}")
+def generate_qrcode(lines):
+    qrcode.make(lines[0]).save("-".join(lines[1].split(" ")) + ".png")
+    print(f"QR code generated and saved as {lines[1]}")
 
-[url, fileName] = read_from_file(os.path.abspath("user_data.txt"))
-
-generate_qrcode(url, fileName)
+generate_qrcode(read_from_file(os.path.abspath("user_data.txt")))
