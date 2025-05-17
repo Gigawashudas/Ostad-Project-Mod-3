@@ -4,28 +4,22 @@
 import os
 import qrcode
 
-def read_from_file(fileName):
-    with open(fileName, "r") as file:
+def read_from_file(inputFileName):
+    with open(inputFileName, "r") as file:
         lines = file.readlines()
         url = lines[0].strip()
-        filename = lines[1].strip()
-        return url, filename
+        fileName = lines[1].strip()
+        return url, fileName
 
-def generate_qrcode(data, qrcode_file_name):
-    qr = qrcode.make(data)
-    qr.save(qrcode_file_name + ".png")
-    print(f"QR code generated and saved as {qrcode_file_name}")
+def generate_qrcode(url, fileName):
+    fileName = "-".join(fileName.split(" "))
+    qr = qrcode.make(url)
+    qr.save(fileName + ".png")
+    print(f"QR code generated and saved as {fileName}")
 
-absFilePath = os.path.abspath("File.txt")
-fileName = os.path.basename(absFilePath)
+[url , fileName] = read_from_file(os.path.abspath("user_data.txt"))
 
-print(absFilePath)
-print(fileName)
+print(url + "\n" + fileName)
 
-data = read_from_file(fileName)
-
-print(data[0])
-qrcode_file_name = data[1]
-
-qr_code = generate_qrcode(data, qrcode_file_name)
+generate_qrcode(url, fileName)
 
